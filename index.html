@@ -1,12 +1,516 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@600&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#340080",
+                        "inverse-primary": "#6d3bd7",
+                        "tertiary-container": "#ca8100",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-variant": "#2d3449",
+                        "primary-container": "#a078ff",
+                        "surface": "#0b1326",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-secondary": "#003824",
+                        "on-primary": "#3c0091",
+                        "error-container": "#93000a",
+                        "surface-container": "#171f33",
+                        "inverse-surface": "#dae2fd",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-low": "#131b2e",
+                        "surface-dim": "#0b1326",
+                        "outline": "#958ea0",
+                        "surface-container-highest": "#2d3449",
+                        "on-primary-fixed": "#23005c",
+                        "on-surface": "#dae2fd",
+                        "surface-bright": "#31394d",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb95f",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#2a1700",
+                        "outline-variant": "#494454",
+                        "on-tertiary-container": "#3e2400",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-on-surface": "#283044",
+                        "surface-tint": "#d0bcff",
+                        "on-tertiary": "#472a00",
+                        "on-secondary-container": "#00311f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-surface-variant": "#cbc3d7",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-error": "#690005",
+                        "background": "#0b1326",
+                        "secondary": "#4edea3",
+                        "surface-container-high": "#222a3d",
+                        "surface-container-lowest": "#060e20",
+                        "secondary-container": "#00a572",
+                        "primary": "#d0bcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "xs": "8px",
+                        "container-max": "1280px",
+                        "gutter": "20px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "12px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "stat-number": ["Sora"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "stat-number": ["20px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .surface_glass {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(208, 188, 255, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(78, 222, 163, 0.1), transparent);
+        }
+        .neon-glow-primary:hover {
+            box-shadow: 0 0 20px rgba(208, 188, 255, 0.3);
+        }
+        .neon-glow-secondary:hover {
+            box-shadow: 0 0 20px rgba(78, 222, 163, 0.3);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #d0bcff 0%, #ffb4ab 100%);
+        }
+    </style>
 </head>
-<body>
-    <h1>Hola Tiajsh</h1>
-    <p>primer commit</p>
-</body>
+    <body class="bg-background text-on-surface font-body-md selection:bg-primary/30">
+    <!-- TopNavBar -->
+        <header class="bg-surface/80 backdrop-blur-xl dark:bg-surface/80 border-b border-white/10 dark:border-surface-variant docked full-width top-0 sticky z-50 shadow-2xl">
+            <nav class="flex justify-between items-center max-w-container-max mx-auto px-gutter py-md">
+                <div class="flex items-center gap-xl">
+                    <span class="text-headline-md font-headline-md tracking-tighter text-primary dark:text-primary">B G F</span>
+                    <div class="hidden md:flex gap-lg">
+                        <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#midnight-vault">Library</a>
+                        <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#perfect-game">Perfect Game</a>
+                        <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#soundtracks">Soundtracks</a>
+                        <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#tribes">Tribes</a>
+                        <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#live-lounge">Live lounge</a>
+                    </div>
+                </div>
+            <div class="flex items-center gap-md">
+            <div class="relative hidden lg:block">
+            <input class="bg-surface-container-low border-outline-variant rounded-full px-lg py-xs text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none w-64" placeholder="Search lounge..." type="text"/>
+            </div>
+            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="account_circle">account_circle</button>
+            </div>
+            </nav>
+        </header>
+        <main>
+            
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center overflow-hidden hero-gradient">
+            <div class="absolute inset-0 z-0 opacity-40">
+                <img alt="Midnight Lounge Vibe" class="w-full h-full object-cover" src="imgs/fondo.png"/>
+            </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+        <div class="max-w-container-max mx-auto px-gutter relative z-10 w-full">
+        <div class="max-w-3xl">
+        <span class="text-secondary font-label-caps mb-md block tracking-widest">THE AFTER-HOURS HUB</span>
+        <h1 class="text-display-lg font-display-lg text-on-surface mb-lg leading-tight">
+                                BOARD GAME <br/>
+        <span class="text-transparent bg-clip-text primary-gradient">FRIENDS</span>
+        </h1>
+        <p class="text-body-lg font-body-lg text-on-surface-variant mb-xl max-w-xl">
+                                Elevate your tabletop nights with AI-powered soundtracks, expert matchmaker tech, and a global tribe of heavy-strategy enthusiasts.
+                            </p>
+        <div class="flex flex-wrap gap-md">
+        <button class="primary-gradient text-on-primary font-label-caps px-xl py-md rounded-lg neon-glow-primary active:scale-95 transition-all">Join the Lounge</button>
+        <button class="surface_glass text-primary border-primary border font-label-caps px-xl py-md rounded-lg active:scale-95 transition-all">Explore Tribes</button>
+        </div>
+        </div>
+        </div>
+        </section>
+
+
+        <!-- Curated Collection -->
+        <section id="midnight-vault" class="py-xl max-w-container-max mx-auto px-gutter">
+        <div class="flex justify-between items-end mb-xl">
+        <div>
+        <h2 class="text-headline-lg font-headline-lg mb-xs">Library</h2>
+        <p class="text-on-surface-variant font-body-md">Search for any board game in the app's built-in game library, rate it, see a summary, and view its specifications.</p>
+        </div>
+        <button class="text-secondary font-label-caps flex items-center gap-xs ">
+                            View All Games <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+        </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+        <!-- Game Card 1 -->
+        <div class="surface_glass rounded-xl overflow-hidden group">
+        <div class="relative h-64 overflow-hidden">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-fidelity cinematic product shot of the board game Scythe showing its detailed diesel-punk miniatures and beautifully illustrated cardboard map. The lighting is moody and atmospheric with deep blues and metallic highlights to fit a premium midnight lounge aesthetic. Shallow depth of field focuses on a single mech unit." src="imgs/voidfall.jpeg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+        <div class="absolute top-md right-md bg-surface/80 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+        <span class="material-symbols-outlined text-tertiary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="text-stat-number font-stat-number text-sm">8.4</span>
+        </div>
+        </div>
+        <div class="p-lg">
+        <h3 class="text-headline-md font-headline-md mb-xs">Voidfall</h3>
+        <div class="flex gap-sm mb-md">
+        <span class="text-label-caps font-label-caps bg-primary/10 text-primary px-sm py-1 rounded">Engine Building</span>
+        <span class="text-label-caps font-label-caps bg-secondary/10 text-secondary px-sm py-1 rounded">115m</span>
+        </div>
+        <div class="flex items-center justify-between border-t border-white/5 pt-md">
+        <span class="text-label-caps font-label-caps text-on-surface-variant">1-5 Players</span>
+        <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" data-icon="add_circle">add_circle</button>
+        </div>
+        </div>
+        </div>
+        <!-- Game Card 2 -->
+        <div class="surface_glass rounded-xl overflow-hidden group">
+        <div class="relative h-64 overflow-hidden">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Stunning close-up of Everdell board game components including the 3D Evertree and colorful woodland critter meeples. The visual style is ethereal and magical, with soft neon glows highlighting the berries and gems. The backdrop is a deep navy night sky filled with digital stars, maintaining the Midnight Meeple luxury identity." src="imgs/gloomhaven.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+        <div class="absolute top-md right-md bg-surface/80 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+        <span class="material-symbols-outlined text-tertiary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="text-stat-number font-stat-number text-sm">8.1</span>
+        </div>
+        </div>
+        <div class="p-lg">
+        <h3 class="text-headline-md font-headline-md mb-xs">Gloomhaven</h3>
+        <div class="flex gap-sm mb-md">
+        <span class="text-label-caps font-label-caps bg-primary/10 text-primary px-sm py-1 rounded">Worker Placement</span>
+        <span class="text-label-caps font-label-caps bg-secondary/10 text-secondary px-sm py-1 rounded">80m</span>
+        </div>
+        <div class="flex items-center justify-between border-t border-white/5 pt-md">
+        <span class="text-label-caps font-label-caps text-on-surface-variant">1-4 Players</span>
+        <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" data-icon="add_circle">add_circle</button>
+        </div>
+        </div>
+        </div>
+        <!-- Game Card 3 -->
+        <div class="surface_glass rounded-xl overflow-hidden group">
+        <div class="relative h-64 overflow-hidden">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Cinematic top-down view of a Terraforming Mars session in progress. The red planet's surface is vibrant with greenery and ocean tiles. The surrounding space is a deep, dark abyss punctuated by sharp purple and teal lighting. The composition emphasizes the high-tech, strategic complexity of the board state under a glass-morphic filter." src="imgs/terra.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+        <div class="absolute top-md right-md bg-surface/80 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+        <span class="material-symbols-outlined text-tertiary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="text-stat-number font-stat-number text-sm">8.6</span>
+        </div>
+        </div>
+        <div class="p-lg">
+        <h3 class="text-headline-md font-headline-md mb-xs">Terraforming Mars</h3>
+        <div class="flex gap-sm mb-md">
+        <span class="text-label-caps font-label-caps bg-primary/10 text-primary px-sm py-1 rounded">Drafting</span>
+        <span class="text-label-caps font-label-caps bg-secondary/10 text-secondary px-sm py-1 rounded">120m</span>
+        </div>
+        <div class="flex items-center justify-between border-t border-white/5 pt-md">
+        <span class="text-label-caps font-label-caps text-on-surface-variant">1-5 Players</span>
+        <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" data-icon="add_circle">add_circle</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+
+
+        <!-- AI Matchmaker Section -->
+        <section class="py-xl bg-surface-container-lowest border-y border-white/5">
+        <div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+        <div class="relative">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-[80px]"></div>
+        <div class="surface_glass p-lg rounded-2xl relative z-10">
+        <div class="flex items-center gap-md mb-lg">
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary-container" data-icon="smart_toy">smart_toy</span>
+        </div>
+        <div>
+        <p class="text-headline-md font-headline-md leading-none">BGF AI</p>
+        <p class="text-label-caps font-label-caps text-secondary">Recommendation Engine</p>
+        </div>
+        </div>
+        <div class="space-y-md mb-lg">
+        <div class="bg-surface-container p-md rounded-lg rounded-tl-none max-w-[85%]">
+        <p class="text-body-md">"Welcome back, Commander. I see you're in the mood for high-complexity area control. Should I look for a Scythe group tonight?"</p>
+        </div>
+        <div class="bg-primary/20 p-md rounded-lg rounded-tr-none ml-auto max-w-[85%] border border-primary/20">
+        <p class="text-body-md">"Yes, but only if they're using the AI Soundtracks. I want that industrial vibe."</p>
+        </div>
+        <div class="bg-surface-container p-md rounded-lg rounded-tl-none max-w-[85%]">
+        <p class="text-body-md">"Understood. Analyzing groups in 'The Euro-Kings' tribe. 3 squads active. Sending invites now."</p>
+        </div>
+        </div>
+        <div class="relative">
+            <input 
+                id="myInput"
+                class="w-full bg-background/50 border border-white/10 rounded-lg px-md py-md text-body-md focus:ring-1 focus:ring-primary outline-none" 
+                placeholder="Type your preference..." 
+                type="text"
+            />
+
+            <button 
+                onclick="document.getElementById('myInput').value = ''"
+                class="absolute right-md top-1/2 -translate-y-1/2 text-primary material-symbols-outlined" 
+                data-icon="send"
+            >
+                send
+            </button>
+            </div>
+        </div>
+        </div>
+        <div id="perfect-game" class="lg:pl-xl">
+        <h2 class="text-display-lg font-display-lg mb-lg">Find Your <br/><span class="text-secondary">Perfect Game</span></h2>
+        <p class="text-body-lg font-body-lg text-on-surface-variant mb-xl">
+                                Our recommendation engine doesn't just look at mechanics. It analyzes player temperament, session length preferences, and visual aesthetics to pair you with the right tribe.
+                            </p>
+        <ul class="space-y-md">
+        <li class="flex items-center gap-md text-on-surface">
+        <span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+        <span class="font-body-md">Mechanic-based group clustering</span>
+        </li>
+        <li class="flex items-center gap-md text-on-surface">
+        <span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+        <span class="font-body-md">Real-time 'Lounge Open' status tracking</span>
+        </li>
+        <li class="flex items-center gap-md text-on-surface">
+        <span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+        <span class="font-body-md">Contextual AI-assistant hosting</span>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </section>
+        <!-- Dynamic Soundtracks -->
+        <section id="soundtracks" class="py-xl max-w-container-max mx-auto px-gutter">
+        <div class="text-center mb-xl">
+        <h2 class="text-headline-lg font-headline-lg mb-xs">Soundtracks</h2>
+        <p class="text-on-surface-variant font-body-md">AI-generated Spotify playlists that adapt to your game's intensity.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-lg">
+        <!-- Playlist 1 -->
+        <div class="group cursor-pointer">
+        <div class="relative aspect-square rounded-xl overflow-hidden mb-md shadow-xl group-hover:shadow-primary/20 transition-all">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Abstract digital album cover art for a board game soundtrack titled Ancient Ruins. The visual features crumbling glowing stone arches in a dark purple jungle, with neon green light vines wrapping around pillars. The style is futuristic synthwave with high-contrast shadows and deep atmospheric depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS8XM0VUN1ynZINA0UcKTsPBYOQURB0XbZusKicRSFfFQX1L8nfk8ux2LrI8SOCvDEPV8OrS3MCpWvR6XdkZOCso995mAkg0wFb5Mg_rY2NVZlca0SlRawbtfoFwc0nGYYIzvVWp4vMWUlvHWFKyCkoNy2iYKZVXiOWLaaypQ9oYVW-LSWJjCe27dfEx2tqqrd0pdmnmR0Kt5j-qifdYLWMbFDUaiWV3c2ZSHx8ujlmmKwMJr44UVDauBP-KuWxvyavYNki1mPkyI"/>
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <span class="material-symbols-outlined text-on-primary text-4xl bg-primary p-md rounded-full" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+        </div>
+        <h4 class="text-headline-md font-headline-md text-center text-sm">Ancient Ruins</h4>
+        <p class="text-label-caps font-label-caps text-on-surface-variant text-center">Atmospheric Ambient</p>
+        </div>
+        <!-- Playlist 2 -->
+        <div class="group cursor-pointer">
+        <div class="relative aspect-square rounded-xl overflow-hidden mb-md shadow-xl group-hover:shadow-secondary/20 transition-all">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Album art for a playlist called Neon Conquest. It depicts a futuristic tabletop map with glowing neon pink and cyan grid lines extending into a dark infinity. Stylized low-poly mountains rise from the grid under a large synthwave sun. The aesthetic is cyber-neon with sharp edges and vibrant lighting effects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe_QD2agUvN9q90nKZ5QMELgtNWJ6uJmpV6BFV6zbY_qy_p4Pr6O8oBl7f9iyOv1DvW-UDwYXebFcO0F7K0qOBGpFRRxNr1zDkxIt_2fGUngDXDCPDMdyRuuCGTbmiUPgGb1-YgF0MMmbzAUDUtoJw3w1p09VK6qbYKbn7r7Py7_XlSqfEZs11FnPSgayQ2xHNC55_kabXel8t6KZ1LqQ9Ve_TyX7N5zTBqc6W1U1dQcy3yVVqvGmTb-66xtVi3V_0BVmsHigRsSc"/>
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <span class="material-symbols-outlined text-on-secondary text-4xl bg-secondary p-md rounded-full" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+        </div>
+        <h4 class="text-headline-md font-headline-md text-center text-sm">Neon Conquest</h4>
+        <p class="text-label-caps font-label-caps text-on-surface-variant text-center">Fast-Paced Techno</p>
+        </div>
+        <!-- Playlist 3 -->
+        <div class="group cursor-pointer">
+        <div class="relative aspect-square rounded-xl overflow-hidden mb-md shadow-xl group-hover:shadow-tertiary/20 transition-all">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Intricate album artwork for 'Deep Space Strategy'. It features a massive gothic spaceship silhouette against a backdrop of a swirling orange nebula. The lighting is cinematic and moody, with tiny glowing windows on the ship. The overall mood is mysterious, epic, and perfect for a midnight board game session." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVtsRvg94HJSYhxXuRlQRrLCNcHCJWd8JEmcnORdTyGRDxR_YL0X_XDp--4xY1_tYO4dvbu__g50CZRO_8TqSseeNOQ0INw0xXdIjjzrqrckbmBJpMKGfjrEbk1KzXK_t3gfZKatnYDuYgk6gMv6KOZN-3m46paeIiXq3_njfLA_u1dVOa_gvqfCkp9axSAyThrfe9nIWz6bEnJxOVJ3nibB97A-Mhn_oV_GZVODqMIKGjpmeLILDuKfIdFEmibgNxoWugArveHNQ"/>
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <span class="material-symbols-outlined text-on-tertiary text-4xl bg-tertiary p-md rounded-full" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+        </div>
+        <h4 class="text-headline-md font-headline-md text-center text-sm">Space Strategy</h4>
+        <p class="text-label-caps font-label-caps text-on-surface-variant text-center">Epic Orchestral</p>
+        </div>
+        <!-- Playlist 4 -->
+        <div class="group cursor-pointer">
+        <div class="relative aspect-square rounded-xl overflow-hidden mb-md shadow-xl group-hover:shadow-error/20 transition-all">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Dark, moody album cover for 'Dungeon Crawler Beats'. Heavy shadows with intense red light emanating from iron grates. Rusty chains and blurred stone textures create a claustrophobic yet premium feel. High-energy percussive patterns are suggested by the rhythmic visual elements in the design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvDcTnBf2YDv9NN2uIRvmEObJWvzyHFoZiaaes8FMKlKZwAafi7OPCVq6MJdi46THan7uqey8PNILuNtA2iC6y44ft1AD9GWBQowSepvY5ntVRGAMZpIN4c8bHqZe_o1aEkEwAQDyV16lxATTH_fyEX-p_5wRAmX9qABpa9N9I5t7LAOCh4yNj5ZdTzqiM5c1TgO0cCD8iTblr5jYnC6JrShMnSpjBjOzvgdU49zWt0XaLHQsv5hni4oPMJ0Ru1seXWchqDMtuiiY"/>
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <span class="material-symbols-outlined text-white text-4xl bg-error p-md rounded-full" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+        </div>
+        <h4 class="text-headline-md font-headline-md text-center text-sm">Dungeon Beats</h4>
+        <p class="text-label-caps font-label-caps text-on-surface-variant text-center">Heavy Percussion</p>
+        </div>
+        </div>
+        </section>
+
+
+
+        <!-- Tribes Section -->
+        <section id="tribes" class="py-xl bg-surface-container relative overflow-hidden">
+        <div class="max-w-container-max mx-auto px-gutter flex flex-col items-center text-center">
+        <h2 class="text-display-lg font-display-lg mb-lg">Find Your Tribe</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg w-full">
+        <!-- Tribe Card 1 -->
+        <div class="surface_glass p-xl rounded-2xl flex items-center gap-xl text-left border-l-4 border-l-primary group cursor-pointer hover:bg-surface-container-high transition-colors">
+        <div class="bg-primary/10 p-lg rounded-full">
+        <span class="material-symbols-outlined text-primary text-4xl" data-icon="castle">castle</span>
+        </div>
+        <div>
+        <h3 class="text-headline-md font-headline-md mb-xs">The Euro-Kings</h3>
+        <p class="text-body-md text-on-surface-variant mb-md">Masters of optimization and zero-luck efficiency. Join for high-stakes worker placement.</p>
+        <span class="text-label-caps font-label-caps text-primary">1.2k Tacticians</span>
+        </div>
+        </div>
+        <!-- Tribe Card 2 -->
+        <div class="surface_glass p-xl rounded-2xl flex items-center gap-xl text-left border-l-4 border-l-secondary group cursor-pointer hover:bg-surface-container-high transition-colors">
+        <div class="bg-secondary/10 p-lg rounded-full">
+        <span class="material-symbols-outlined text-secondary text-4xl" data-icon="style">style</span>
+        </div>
+        <div>
+        <h3 class="text-headline-md font-headline-md mb-xs">Deck-Builders' Den</h3>
+        <p class="text-body-md text-on-surface-variant mb-md">For those who believe life is just one big engine optimization. Weekly tournaments.</p>
+        <span class="text-label-caps font-label-caps text-secondary">850 Engineers</span>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        <!-- Community Feed Bento -->
+        <section id="live-lounge" class="py-xl max-w-container-max mx-auto px-gutter">
+        <div class="mb-xl">
+        <h2 class="text-headline-lg font-headline-lg mb-xs">Live Lounge</h2>
+        <p class="text-on-surface-variant font-body-md">What's happening across the global tables right now.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg h-auto lg:h-[600px]">
+        <div class="lg:col-span-2 surface_glass rounded-2xl p-lg relative overflow-hidden">
+        <img alt="Community Activity Overlay" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7BzvMG4Q3f5f74-5IxsflvoXUzZ-eHCB__rvYQCH2cIv-CFryJ6yybZwuNnoZxPxFkroHRJmnhj9oCj4cKFbZ8NMEnndeciDNtJc9S9U7SEf4NBMJId7Mt0pOhxwZnlq4Di2NBTWwTMwKiVymYqoK5PFAjD-l9_LBCqsygGt6dpiTvx-vr1-6WNC5NXumRixaFHXFwJp7j5t1SERfuB59cHlk8LIdbBeFHe5y_g_TQ4BXv3_HxD6ae0ujqQcwvYbKh5o0QEPlGjQ"/>
+        <div class="relative z-10">
+        <h3 class="text-headline-md font-headline-md mb-lg">Top Tacticians This Week</h3>
+        <div class="space-y-md">
+        <div class="flex items-center justify-between p-md bg-surface/40 rounded-lg backdrop-blur-sm border border-white/5">
+        <div class="flex items-center gap-md">
+        <span class="text-stat-number font-stat-number text-primary">01</span>
+        <div class="w-10 h-10 rounded-full bg-surface-bright flex items-center justify-center">
+        <span class="material-symbols-outlined text-secondary" data-icon="person">person</span>
+        </div>
+        <div>
+        <p class="font-bold">Dreadnought_01</p>
+        <p class="text-label-caps text-xs text-on-surface-variant">Tribe: Euro-Kings</p>
+        </div>
+        </div>
+        <div class="text-right">
+        <p class="text-stat-number font-stat-number">2,450 XP</p>
+        <p class="text-label-caps text-xs text-secondary">+12.4% vs last week</p>
+        </div>
+        </div>
+        <div class="flex items-center justify-between p-md bg-surface/40 rounded-lg backdrop-blur-sm border border-white/5">
+        <div class="flex items-center gap-md">
+        <span class="text-stat-number font-stat-number text-on-surface-variant">02</span>
+        <div class="w-10 h-10 rounded-full bg-surface-bright flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+        </div>
+        <div>
+        <p class="font-bold">MeepleMaster_X</p>
+        <p class="text-label-caps text-xs text-on-surface-variant">Tribe: Deck-Builders</p>
+        </div>
+        </div>
+        <div class="text-right">
+        <p class="text-stat-number font-stat-number">2,120 XP</p>
+        <p class="text-label-caps text-xs text-secondary">+5.8% vs last week</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="surface_glass rounded-2xl p-lg flex flex-col">
+        <h3 class="text-headline-md font-headline-md mb-lg">Recent Feed</h3>
+        <div class="flex-1 space-y-lg overflow-y-auto pr-sm">
+        <div class="border-l-2 border-primary pl-md py-xs">
+        <p class="text-body-md mb-1"><span class="text-primary font-bold">@ScytheGuy</span> just claimed the Zenith Badge in the Nordic Highlands session.</p>
+        <p class="text-label-caps text-xs text-on-surface-variant">2m ago</p>
+        </div>
+        <div class="border-l-2 border-secondary pl-md py-xs">
+        <p class="text-body-md mb-1"><span class="text-secondary font-bold">@CardShark</span> invited all Tribes to a midnight tournament.</p>
+        <p class="text-label-caps text-xs text-on-surface-variant">15m ago</p>
+        </div>
+        <div class="border-l-2 border-primary pl-md py-xs">
+        <p class="text-body-md mb-1"><span class="text-primary font-bold">@MeepleAI</span> matched 4 players for 'Terraforming Mars'.</p>
+        <p class="text-label-caps text-xs text-on-surface-variant">1h ago</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-surface-container-lowest w-full pt-xl pb-lg border-t border-white/5 dark:border-surface-variant">
+    <div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+    <div class="lg:col-span-1">
+    <span class="text-headline-md font-headline-md text-primary dark:text-primary-fixed mb-md block">Midnight Meeple</span>
+    <p class="text-body-md font-body-md text-on-surface-variant">
+                        The ultimate after-hours lounge for serious strategists and social gamers.
+                    </p>
+    </div>
+    <div>
+    <h4 class="text-label-caps font-label-caps text-secondary mb-md">Community</h4>
+    <ul class="space-y-sm">
+    <li><a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Join a Tribe</a></li>
+    <li><a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Community Guidelines</a></li>
+    <li><a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Game Night Hosting</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-label-caps font-label-caps text-secondary mb-md">Lounge Legal</h4>
+    <ul class="space-y-sm">
+    <li><a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+    <li><a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-label-caps font-label-caps text-secondary mb-md">Connect</h4>
+    <div class="flex gap-md">
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="forum">forum</button>
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="share">share</button>
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="mail">mail</button>
+    </div>
+    </div>
+    </div>
+        <div class="max-w-container-max mx-auto px-gutter mt-xl pt-lg border-t border-white/5 text-center">
+            <p class="text-body-md font-body-md text-on-surface-variant">
+                © 2024 Midnight Meeple. The ultimate after-hours game lounge.
+            </p>
+        </div>
+        </footer>
+    </body>
 </html>
